@@ -15,7 +15,7 @@
 /src/Sample.Contracts/obj
 /src/Sample.Core/bin
 /src/Sample.Core/obj
-/src/Sample.DataAccess
+/src/Sample.DataAccess/bin
 /src/Sample.DataAccess/obj
 /src/Sample.Entities/bin
 /src/Sample.Entities/obj
