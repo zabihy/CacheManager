@@ -1,8 +1,9 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using Nop.Core.Configuration;
+using Sample.Core;
 using StackExchange.Redis;
 
 namespace XCache
@@ -26,9 +27,9 @@ namespace XCache
 
         public RedisCacheManager(ICacheManager perRequestCacheManager,
             IRedisConnectionWrapper connectionWrapper,
-            NopConfig config)
+            IOptionsSnapshot<SampleConfig> options)
         {
-            if (string.IsNullOrEmpty(config.RedisCachingConnectionString))
+            if (string.IsNullOrEmpty(options.Value.RedisCachingConnectionString))
                 throw new Exception("Redis connection string is empty");
 
             this._perRequestCacheManager = perRequestCacheManager;

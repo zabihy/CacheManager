@@ -1,9 +1,10 @@
 using System;
 using System.Linq;
 using System.Net;
-using Nop.Core.Configuration;
+using Microsoft.Extensions.Options;
 using RedLockNet.SERedis;
 using RedLockNet.SERedis.Configuration;
+using Sample.Core;
 using StackExchange.Redis;
 
 namespace XCache
@@ -15,7 +16,7 @@ namespace XCache
     {
         #region Fields
 
-        private readonly NopConfig _config;
+        private readonly SampleConfig _config;
 
         private readonly object _lock = new object();
         private volatile ConnectionMultiplexer _connection;
@@ -26,9 +27,9 @@ namespace XCache
 
         #region Ctor
 
-        public RedisConnectionWrapper(NopConfig config)
+        public RedisConnectionWrapper(IOptionsSnapshot<SampleConfig> options)
         {
-            this._config = config;
+            this._config = options.Value;
             this._connectionString = new Lazy<string>(GetConnectionString);
             this._redisLockFactory = CreateRedisLockFactory();
         }
